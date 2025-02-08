@@ -137,7 +137,7 @@ with tab2:
     with a11:
         Registration_Year=st.number_input("Enter car registration year",min_value=1900)
     with a12:
-        InsuranceValidity_select=st.selectbox("Select Insurance Type",["Third Party","Comprehensive","Zero Dep","Not Available","1","2"])
+        InsuranceValidity_select=st.selectbox("Select Insurance Type",dropdown_options["Insurance Validity"])
         InsuranceValidity=encoder_Insurance_Validity.transform([[InsuranceValidity_select]])[0][0]
     with a13:
         Seats=st.number_input("Enter seat capacity",min_value=4)
