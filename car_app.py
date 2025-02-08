@@ -31,7 +31,7 @@ def set_background_image_local(image_path):
         unsafe_allow_html=True
     )
 
-set_background_image_local(r"pexels-mccutcheon-1566909.jpg")
+set_background_image_local(r"car_sale1.jpg")
 
 model_car=load_model("carmodel2.pkl")
 
