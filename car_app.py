@@ -36,7 +36,7 @@ set_background_image_local(r"car_sale1.jpg")
 model_car=load_model("carmodel2.pkl")
 
 encoder_city=load_model("encoder_city.pkl")
-encoder_Insurance_Validity=load_model("encoder_Insurance_Validity.pkl")
+encoder_Insurance_Validity=load_model("encoder_Insurance_Validity (1).pkl")
 encoder_bt=load_model("encoder_bt.pkl")
 encoder_ft=load_model("encoder_ft.pkl")
 encoder_oem=load_model("encoder_oem.pkl")
