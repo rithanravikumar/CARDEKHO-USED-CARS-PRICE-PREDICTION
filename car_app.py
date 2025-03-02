@@ -31,20 +31,21 @@ def set_background_image_local(image_path):
         unsafe_allow_html=True
     )
 
-set_background_image_local(r"car_sale1.jpg")
+set_background_image_local("D:/USED CARS/greenbg.jpg")
 
-model_car=load_model("carmodel2.pkl")
+model_car=load_model("D:/USED CARS/carmodel_final.pkl")
 
-encoder_city=load_model("encoder_city.pkl")
-encoder_Insurance_Validity=load_model("encoder_Insurance_Validity (1).pkl")
-encoder_bt=load_model("encoder_bt.pkl")
-encoder_ft=load_model("encoder_ft.pkl")
-encoder_oem=load_model("encoder_oem.pkl")
-encoder_model=load_model("encoder_model.pkl")
-encoder_transmission=load_model("encoder_transmission.pkl")
-encoder_variantName=load_model("encoder_variantName.pkl")
+encoder_city=load_model("D:/USED CARS/encoder_city.pkl")
+encoder_Insurance_Validity=load_model("D:/USED CARS/encoder_Insurance_Validity (1).pkl")
+encoder_bt=load_model("D:/USED CARS/encoder_bt.pkl")
+encoder_ft=load_model("D:/USED CARS/encoder_ft.pkl")
+encoder_oem=load_model("D:/USED CARS/encoder_oem.pkl")
+encoder_model=load_model("D:/USED CARS/encoder_model.pkl")
+encoder_transmission=load_model("D:/USED CARS/encoder_transmission.pkl")
+encoder_variantName=load_model("D:/USED CARS/encoder_variantName.pkl")
 
-ml_df=pd.read_excel("ml_dl.xlsx")
+ml_df=pd.read_excel("D:/USED CARS/ml_dl.xlsx")
+st.title("")
 st.title("Car Price Prediction App")
 
 categorical_features = ["city", "ft", "bt", "transmission", "oem", "model", "variantName", "Insurance Validity"]
@@ -53,46 +54,51 @@ dropdown_options = {feature: ml_df[feature].unique().tolist() for feature in cat
 tab1, tab2 = st.tabs(["Home", "Predict"])
 with tab1:
     st.markdown("""
-                **1. Introduction**
-                In the rapidly evolving automotive market, determining the right price for a vehicle is crucial 
-                for both buyers and sellers. The Car Price Prediction App provides an intelligent solution to 
-                estimate car prices based on key parameters using machine learning models. This tool helps users 
-                make data-driven decisions by leveraging historical data and predictive analytics.
+                **1. Introduction:**
+                In today’s fast-paced automotive industry, accurately pricing a vehicle is essential for both buyers and sellers.
+                The Car Price Prediction App provides a smart solution to estimate car prices using machine learning.
+                By analyzing historical data and applying predictive analytics, this tool empowers users to make well-informed decisions.
+
+
+                **2. Problem Statement:**
+                Determining a car’s fair market value involves assessing multiple factors such as brand, model, manufacturing year, 
+                mileage, fuel type, and transmission. Manually evaluating these aspects can be tedious and complex. 
+                The Car Price Prediction App streamlines this process by delivering quick and precise price estimates.
+
+            
+                **3. Key Features:**
+                Intuitive Interface :- A user-friendly and interactive UI built with Streamlit.
+
+                Machine Learning Model :- Employs an advanced regression algorithm (XGBRegressor) trained on a comprehensive dataset.
+
+                Customizable Inputs :- Users can specify car details, including brand, model, year, fuel type, and transmission.
+
+                Instant Price Estimation :- Provides real-time predictions based on user inputs.
+
+                Comparison Feature :- Enables users to compare multiple cars for better decision-making.
                 
-                **2. Problem Statement**
-                Buying or selling a car requires understanding its fair market value, which is influenced 
-                by multiple factors such as brand, model, year of manufacture, mileage, fuel type, and transmission. 
-                Manually evaluating these factors can be complex and time-consuming. The Car Price Prediction App simplifies 
-                this process by providing instant and accurate price predictions.
+                **4. Target Audience:**
+                Car Buyers & Sellers :- Individuals seeking a fair market price for used cars.
+
+                Dealerships & Businesses :- Car dealerships and resellers needing quick car price evaluations.
+
+                Financial Institutions :- Banks and insurance companies assessing car values for loans and policies.
                 
-                **3. Key Features**
-                User-Friendly Interface: Simple and interactive Streamlit-based UI.
-                Machine Learning Model: Utilizes an advanced regression model (XGBRegressor) trained 
-                on a vast dataset of car prices.
-                Feature Inputs: Users can enter details like car brand, model, manufacturing year, fuel type, 
-                transmission, and other relevant attributes.
-                Real-Time Predictions: Provides instant car price estimates based on input parameters.
-                Comparison Tool: Allows users to compare multiple cars for better decision-making.
+                **5. Technologies Used:**
+                Frontend:- Built with Streamlit for an interactive web experience.
+
+                Backend:- Developed using Python and key machine learning libraries like Scikit-learn, XGBoost, and Pandas.
+
+                Model Deployment:- The trained model is seamlessly integrated into the Streamlit app for real-time predictions.
                 
-                **4. Target Audience**
-                Car Buyers & Sellers: Individuals looking to buy or sell a used car at a fair market price.
-                Dealerships & Businesses: Car dealerships and resellers who need an efficient way to estimate car values.
-                Financial Institutions: Banks and insurance companies that assess car values for loan and policy decisions.
+                **6. MLFlow:**
+                The project incorporates MLflow to efficiently track and manage machine learning experiments within the Streamlit application.
+                It logs essential details such as model parameters, performance metrics (MSE, MAE, R²), and trained models. 
+                MLflow Link: http://127.0.0.1:5000/
                 
-                **5. Technologies Used**
-                Frontend: Streamlit for an interactive and user-friendly web application.
-                Backend: Python with machine learning libraries such as Scikit-learn, XGBoost, and Pandas.
-                Model Deployment: Trained ML model integrated into the Streamlit app for real-time predictions.
-                
-                **6. MLFlow**
-                In my project, I integrated MLflow to efficiently track and manage machine learning experiments within my Streamlit application. 
-                I used MLflow to log important details such as model parameters, performance metrics (like MSE, MAE, and R2),
-                and the trained models themselves. link: http://127.0.0.1:5001
-                
-                **7. Conclusion**
-                The Car Price Prediction App is a powerful tool for individuals and businesses looking to evaluate 
-                car prices efficiently. By leveraging machine learning, it offers a seamless experience in determining a 
-                car's fair value, making the buying and selling process more transparent and informed.
+                **7. Conclusion:**
+                The Car Price Prediction App serves as a valuable tool for individuals and businesses looking to determine car prices with ease. 
+                By leveraging machine learning, it enhances transparency and efficiency in the buying and selling process, ensuring informed decision-making.
                 """)
 with tab2:
     a1,a2,a3=st.columns(3)
@@ -150,4 +156,4 @@ with tab2:
         prediction = model_car.predict(input_data.values.reshape(1, -1))
                 
         st.subheader("Predicted Car Price")
-        st.markdown(f"### :green[₹ {prediction[0]:,.2f}]")
+        st.markdown(f"### :blue[₹ {prediction[0]:,.2f}]")
