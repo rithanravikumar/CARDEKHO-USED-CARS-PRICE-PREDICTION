@@ -94,7 +94,7 @@ with tab1:
                 **6. MLFlow:**
                 The project incorporates MLflow to efficiently track and manage machine learning experiments within the Streamlit application.
                 It logs essential details such as model parameters, performance metrics (MSE, MAE, R²), and trained models. 
-                MLflow Link: http://127.0.0.1:5000/
+                MLflow Link: http://127.0.0.1:8501
                 
                 **7. Conclusion:**
                 The Car Price Prediction App serves as a valuable tool for individuals and businesses looking to determine car prices with ease. 
@@ -157,3 +157,4 @@ with tab2:
                 
         st.subheader("Predicted Car Price")
         st.markdown(f"### :blue[₹ {prediction[0]:,.2f}]")
+ 
