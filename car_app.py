@@ -31,20 +31,20 @@ def set_background_image_local(image_path):
         unsafe_allow_html=True
     )
 
-set_background_image_local("D:/USED CARS/greenbg.jpg")
+set_background_image_local("greenbg.jpg")
 
-model_car=load_model("D:/USED CARS/carmodel_final.pkl")
+model_car=load_model("carmodel_final.pkl")
 
-encoder_city=load_model("D:/USED CARS/encoder_city.pkl")
-encoder_Insurance_Validity=load_model("D:/USED CARS/encoder_Insurance_Validity (1).pkl")
-encoder_bt=load_model("D:/USED CARS/encoder_bt.pkl")
-encoder_ft=load_model("D:/USED CARS/encoder_ft.pkl")
-encoder_oem=load_model("D:/USED CARS/encoder_oem.pkl")
-encoder_model=load_model("D:/USED CARS/encoder_model.pkl")
-encoder_transmission=load_model("D:/USED CARS/encoder_transmission.pkl")
-encoder_variantName=load_model("D:/USED CARS/encoder_variantName.pkl")
+encoder_city=load_model("encoder_city.pkl")
+encoder_Insurance_Validity=load_model("encoder_Insurance_Validity (1).pkl")
+encoder_bt=load_model("encoder_bt.pkl")
+encoder_ft=load_model("encoder_ft.pkl")
+encoder_oem=load_model("encoder_oem.pkl")
+encoder_model=load_model("encoder_model.pkl")
+encoder_transmission=load_model("encoder_transmission.pkl")
+encoder_variantName=load_model("encoder_variantName.pkl")
 
-ml_df=pd.read_excel("D:/USED CARS/ml_dl.xlsx")
+ml_df=pd.read_excel("ml_dl.xlsx")
 st.title("")
 st.title("Car Price Prediction App")
 
