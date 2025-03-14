@@ -33,7 +33,7 @@ def set_background_image_local(image_path):
 
 set_background_image_local("greenbg.jpg")
 
-model_car=load_model("carmodel_final.pkl")
+model_car=load_model("final_carmodel.pkl")
 
 encoder_city=load_model("encoder_city.pkl")
 encoder_Insurance_Validity=load_model("encoder_Insurance_Validity (1).pkl")
