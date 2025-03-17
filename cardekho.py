@@ -165,15 +165,14 @@ with tab3:
     @st.cache_data
     def load_car_data():
         df = pd.read_excel(r"ml_dl.xlsx")
-        df = df.dropna(subset=['oem', 'model', 'price', 'city'])  # Ensure relevant columns have no NaN values
+        df = df.dropna(subset=['oem', 'model', 'price'])  # Ensure relevant columns have no NaN values
         df['oem'] = df['oem'].str.lower()
         df['model'] = df['model'].str.lower()
-        df['city'] = df['city'].str.lower()
         return df
 
     def get_car_details(query, df):
         query = query.lower()
-        price_min, price_max, city = None, None, None
+        price_min, price_max = None, None
 
         # Extract price range
         under_match = re.search(r'under (\d+)', query)
@@ -187,14 +186,9 @@ with tab3:
         elif between_match:
             price_min, price_max = int(between_match.group(1)), int(between_match.group(2))
 
-        # Extract city if mentioned at the end
-        city_match = re.search(r'in (\w+)$', query)
-        if city_match:
-            city = city_match.group(1).strip()
-
         # Extract car brand and model
         words = query.replace("find", "").strip().split()
-        possible_brand_or_model = " ".join(words[:-2] if (price_min or price_max or city) else words)
+        possible_brand_or_model = " ".join(words[:-2] if price_min or price_max else words)
 
         # Filter by brand or model
         filtered_cars = df[(df['oem'] == possible_brand_or_model) | (df['model'] == possible_brand_or_model)]
@@ -204,10 +198,6 @@ with tab3:
             filtered_cars = filtered_cars[filtered_cars['price'] >= price_min]
         if price_max is not None:
             filtered_cars = filtered_cars[filtered_cars['price'] <= price_max]
-
-        # Apply city filtering
-        if city:
-            filtered_cars = filtered_cars[filtered_cars['city'] == city]
 
         if filtered_cars.empty:
             return [{"message": f"No cars found for query: {query}"}]
@@ -225,4 +215,4 @@ with tab3:
             st.write("### Car Details")
             st.json(details)  # Improved structured format
         else:
-            st.write("I'm still learning to answer more queries! Try using 'find' with brand, model, price, and city.")
+            st.write("I'm still learning to answer more queries! Try using 'find' with brand, model, and price.")
