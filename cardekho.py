@@ -196,5 +196,5 @@ with tab3:
                 details = get_car_details_by_brand_or_model(brand_name, df)
                 st.write("### Car Details")
                 st.write(d for d in details)
-            else:
-                st.write("I'm still learning to answer more queries!")
+        else:           
+            st.write("I'm still learning to answer more queries!")
