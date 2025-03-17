@@ -190,9 +190,9 @@ with tab3:
             
     user_query = st.text_input("Ask me about cars!", "")
 
-     if user_query:
-            if "tell me about" in user_query.lower():
-                brand_name = user_query.lower().replace("tell me about", "").strip()
+    if user_query:
+        if "find" in user_query.lower():
+                brand_name = user_query.lower().replace("find", "").strip()
                 details = get_car_details_by_brand_or_model(brand_name, df)
                 st.write("### Car Details")
                 st.write(d for d in details)
