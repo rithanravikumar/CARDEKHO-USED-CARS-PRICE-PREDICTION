@@ -151,7 +151,7 @@ with tab2:
         #EngineDisplacement=st.number_input("Enter Engine CC",min_value=799)
         
     if st.button('Predict'):
-        input_data = pd.DataFrame([city,ft,bt,km,transmission,ownerNo,oem,model,modelYear,variantName,Registration_Year,InsuranceValidity,Seats,EngineDisplacement])
+        input_data = pd.DataFrame([city,ft,km,transmission,ownerNo,oem,model,modelYear,variantName,Registration_Year])
 
         prediction = model_car.predict(input_data.values.reshape(1, -1))
                 
