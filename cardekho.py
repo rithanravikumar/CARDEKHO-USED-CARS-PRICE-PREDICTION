@@ -113,9 +113,9 @@ with tab2:
     with a2:
         ft_select=st.selectbox("Select fuel Type",dropdown_options["ft"])
         ft=encoder_ft.transform([[ft_select]])[0][0]
-    with a3:
-        bt_select=st.selectbox("Select Body Type",dropdown_options["bt"])
-        bt=encoder_bt.transform([[bt_select]])[0][0]
+    #with a3:
+        #bt_select=st.selectbox("Select Body Type",dropdown_options["bt"])
+        #bt=encoder_bt.transform([[bt_select]])[0][0]
     with a4:
         km=st.number_input("Enter KM driven",min_value=10)
     with a5:
@@ -142,13 +142,13 @@ with tab2:
         variantName=encoder_variantName.transform([[variantName_select]])[0][0]
     with a11:
         Registration_Year=st.number_input("Enter car registration year",min_value=1900)
-    with a12:
-        InsuranceValidity_select=st.selectbox("Select Insurance Type",dropdown_options["Insurance Validity"])
-        InsuranceValidity=encoder_Insurance_Validity.transform([[InsuranceValidity_select]])[0][0]
-    with a13:
-        Seats=st.number_input("Enter seat capacity",min_value=4)
-    with a14:
-        EngineDisplacement=st.number_input("Enter Engine CC",min_value=799)
+    #with a12:
+        #InsuranceValidity_select=st.selectbox("Select Insurance Type",dropdown_options["Insurance Validity"])
+        #InsuranceValidity=encoder_Insurance_Validity.transform([[InsuranceValidity_select]])[0][0]
+    #with a13:
+        #Seats=st.number_input("Enter seat capacity",min_value=4)
+    #with a14:
+        #EngineDisplacement=st.number_input("Enter Engine CC",min_value=799)
         
     if st.button('Predict'):
         input_data = pd.DataFrame([city,ft,bt,km,transmission,ownerNo,oem,model,modelYear,variantName,Registration_Year,InsuranceValidity,Seats,EngineDisplacement])
