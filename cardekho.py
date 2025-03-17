@@ -175,14 +175,14 @@ with tab3:
             filtered_cars = df[df['oem'] == name_lower]
             if filtered_cars.empty:
                 return [{"message": f"No cars found for brand: {name}"}]
-            return filtered_cars[['oem', 'model', 'price', 'ft', 'transmission']].to_dict('records')
+            return filtered_cars[['oem', 'model', 'city', 'price', 'ft', 'transmission']].to_dict('records')
 
         # Check if name matches a model
         elif name_lower in df['model'].unique():
             filtered_cars = df[df['model'] == name_lower]
             if filtered_cars.empty:
                 return [{"message": f"No cars found for model: {name}"}]
-            return filtered_cars[['oem', 'model', 'price', 'ft', 'transmission']].to_dict('records')
+            return filtered_cars[['oem', 'model', 'city', 'price', 'ft', 'transmission']].to_dict('records')
 
         return [{"message": f"No cars found for brand or model: {name}"}]
 
