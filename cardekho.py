@@ -101,11 +101,11 @@ with tab1:
                 By leveraging machine learning, it enhances transparency and efficiency in the buying and selling process, ensuring informed decision-making.
                 """)
 with tab2:
-    a1,a2,a3=st.columns(3)
-    a4,a5,a6=st.columns(3)
-    a7,a8,a9=st.columns(3)
-    a10,a11,a12=st.columns(3)
-    a13,a14=st.columns(2)
+    a1,a2=st.columns(2)
+    a4,a5=st.columns(2)
+    a6,a7=st.columns(2)
+    a8,a9=st.columns(2)
+    a10,a11=st.columns(2)
     
     with a1:
         city_select=st.selectbox("Select City",dropdown_options["city"])
