@@ -189,6 +189,7 @@ with tab3:
     df = load_car_data()
             
     user_query = st.text_input("Ask me about cars!", "")
+    st.text("start searching with keyword [find]")
 
     if user_query:
         if "find" in user_query.lower():
