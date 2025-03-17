@@ -190,14 +190,11 @@ with tab3:
             
     user_query = st.text_input("Ask me about cars!", "")
 
-    if user_query:
-        keywords = ["tell me about", "show me", "find"]
-        matched_keyword = next((kw for kw in keywords if kw in user_query.lower()), None)
-
-        if matched_keyword:
-            brand_or_model = user_query.lower().replace(matched_keyword, "").strip()
-            details = get_car_details_by_brand_or_model(brand_or_model, df)
-            st.write("### Car Details")
-            st.json(details)  # Improved formatting
-        else:
-            st.write("I'm still learning to answer more queries! Try asking about a car brand or model.")
+     if user_query:
+            if "tell me about" in user_query.lower():
+                brand_name = user_query.lower().replace("tell me about", "").strip()
+                details = get_car_details_by_brand_or_model(brand_name, df)
+                st.write("### Car Details")
+                st.write(d for d in details)
+            else:
+                st.write("I'm still learning to answer more queries!")
