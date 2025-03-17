@@ -157,62 +157,45 @@ with tab2:
         st.subheader("Predicted Car Price")
         st.markdown(f"### :blue[₹ {prediction[0]:,.2f}]")
 
-import pandas as pd
-import streamlit as st
-import re
-
 with tab3:
     @st.cache_data
     def load_car_data():
-        df = pd.read_excel(r"ml_dl.xlsx")
-        df = df.dropna(subset=['oem', 'model', 'price'])  # Ensure relevant columns have no NaN values
+        return pd.read_excel(r"ml_dl.xlsx")
+    def get_car_details_by_brand_or_model(name, df):
+        df = df.dropna(subset=['oem', 'model'])  # Ensure 'oem' and 'model' have no NaN values
+
+        # Normalize case for comparison
+        name_lower = name.lower()
         df['oem'] = df['oem'].str.lower()
         df['model'] = df['model'].str.lower()
-        return df
 
-    def get_car_details(query, df):
-        query = query.lower()
-        price_min, price_max = None, None
+        # Check if name matches an OEM (brand)
+        if name_lower in df['oem'].unique():
+            filtered_cars = df[df['oem'] == name_lower]
+            if filtered_cars.empty:
+                return [{"message": f"No cars found for brand: {name}"}]
+            return filtered_cars[['oem', 'model', 'price', 'ft', 'transmission']].to_dict('records')
 
-        # Extract price range
-        under_match = re.search(r'under (\d+)', query)
-        above_match = re.search(r'above (\d+)', query)
-        between_match = re.search(r'between (\d+) to (\d+)', query)
+        # Check if name matches a model
+        elif name_lower in df['model'].unique():
+            filtered_cars = df[df['model'] == name_lower]
+            if filtered_cars.empty:
+                return [{"message": f"No cars found for model: {name}"}]
+            return filtered_cars[['oem', 'model', 'price', 'ft', 'transmission']].to_dict('records')
 
-        if under_match:
-            price_max = int(under_match.group(1))
-        elif above_match:
-            price_min = int(above_match.group(1))
-        elif between_match:
-            price_min, price_max = int(between_match.group(1)), int(between_match.group(2))
-
-        # Extract car brand and model
-        words = query.replace("find", "").strip().split()
-        possible_brand_or_model = " ".join(words[:-2] if price_min or price_max else words)
-
-        # Filter by brand or model
-        filtered_cars = df[(df['oem'] == possible_brand_or_model) | (df['model'] == possible_brand_or_model)]
-
-        # Apply price filtering
-        if price_min is not None:
-            filtered_cars = filtered_cars[filtered_cars['price'] >= price_min]
-        if price_max is not None:
-            filtered_cars = filtered_cars[filtered_cars['price'] <= price_max]
-
-        if filtered_cars.empty:
-            return [{"message": f"No cars found for query: {query}"}]
-
-        return filtered_cars[['oem', 'model', 'city', 'price', 'ft', 'transmission']].to_dict('records')
+        return [{"message": f"No cars found for brand or model: {name}"}]
 
     st.header("Car Chatbot Assistant 💬")
     df = load_car_data()
             
     user_query = st.text_input("Ask me about cars!", "")
+    st.text("start searching with keyword [find]")
 
     if user_query:
-        if "find" in user_query.lower():
-            details = get_car_details(user_query, df)
-            st.write("### Car Details")
-            st.json(details)  # Improved structured format
-        else:
-            st.write("I'm still learning to answer more queries! Try using 'find' with brand, model, and price.")
+            if "find" in user_query.lower():
+                brand_name = user_query.lower().replace("find", "").strip()
+                details = get_car_details_by_brand_or_model(brand_name, df)
+                st.write("### Car Details")
+                st.write(d for d in details)
+            else:
+                st.write("I'm still learning to answer more queries!")
